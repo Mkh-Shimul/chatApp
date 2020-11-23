@@ -1,8 +1,11 @@
 import socket,threading,tkinter
+import sqlite3
+
 host = socket.gethostname()
 port = 4000
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 address = (host,port)
+
 def echo_data(sock):
    while True:
       try:
@@ -10,7 +13,6 @@ def echo_data(sock):
          msg_list.insert(tkinter.END, msg)
       except OSError:
          break
-
 
 
 def send(event=None):
@@ -25,6 +27,14 @@ def send(event=None):
 def on_closing(event=None):
     my_msg.set("{quit}")
     send()
+
+""" Create Database """
+conn = sqlite3.connect("chatApp.db")
+""" Cursor Creation """
+cur = conn.cursor()
+""" Create Database Table """
+# cur.execute("CREATE TABLE data (message_list text)")
+
 
 top = tkinter.Tk()
 top.title("Chat Room")
