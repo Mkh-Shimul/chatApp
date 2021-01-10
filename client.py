@@ -22,13 +22,6 @@ def send(event):
     msg = my_msg.get()
     my_msg.set("")
     s.send(bytes(msg, "utf8"))
-    split_msg = msg.split()
-    word_list = ['bad', 'worst', 'noob', 'blame']
-    for i in range(len(word_list)):
-        for j in range(len(split_msg)):
-            if word_list[i] == split_msg[j]:
-                # print("Ok!")
-                tkinter.messagebox.showerror(title="Message Box", message="You have a warning")
     if msg == "{quit}":
         s.close()
         top.quit()
